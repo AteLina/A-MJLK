@@ -4,7 +4,7 @@ var app = express();
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize({
   dialect: 'sqlite',
-  storage: 'path/to/bookingDatabase.sqlite' //path to dtabase file
+  storage: 'bookingDatabase.sqlite' //path to dtabase file
 });
 
 const reserveInfo = sequelize.define(
@@ -14,19 +14,19 @@ const reserveInfo = sequelize.define(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    email: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    dateTime: {
-        type: DataTypes.STRING, //Figure out the fucking date time stuff
-        allowNull: false,
-    },
-    partySize: {
-        type: Integer,
-        allowNull: false,
-    },
+    }
+    //email: {
+    //    type: DataTypes.STRING,
+    //    allowNull: false
+    //},
+    //dateTime: {
+    //    type: DataTypes.STRING, //Figure out the date time stuff
+    //    allowNull: false,
+    //},
+    //partySize: {
+    //    type: DataTypes.INTEGER,
+    //    allowNull: false,
+    //},
   },
   {
     // Other model options go here
@@ -34,7 +34,7 @@ const reserveInfo = sequelize.define(
 );
 
 async function asyncFunction () {
-  await resInfo.sync();
+  await reserveInfo.sync();
   console.log('The table for the User model was just (re)created!');
 }
 asyncFunction();
@@ -49,17 +49,20 @@ app.use(express.json());
 // For parsing application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-// set the view engine to ejs
-app.set('view engine', 'ejs');
+const path = require('path')
 
+app.get('/', async function(req, res) { //calls frontend to make the website
+  res.sendFile(path.join(__dirname, 'booking.html'));
+});
 // use res.render to load up an ejs view file
 
 
 app.post('/reserveInfo', async function(req, res) { //accepts comments from front end and stores them
-  // console.log(req.body)
-  const reservePost = req.body.name
-  const ID = await reserveInfo.create({ contents: name});
-  console.log("Auto-generated ID:", ID.id);
+  console.log("check")
+  console.log(req.body)
+  //const reserveName = req.body.name
+  //const ID = await reserveInfo.create({ reserveName: name});
+  //console.log("Auto-generated ID:", ID.id);
   
   //console.log(comments)
   // res.send('post method')
