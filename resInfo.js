@@ -41,18 +41,32 @@ asyncFunction();
 
 
 // `sequelize.define` also returns the model
-console.log(reserveInfo == sequelize.models.comments); // true
+// console.log(reserveInfo == sequelize.models.comments); // true
 
 // For parsing application/json
 app.use(express.json());
-
 // For parsing application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
+app.set('view engine', 'ejs')
 
 const path = require('path')
 
-app.get('/', async function(req, res) { //calls frontend to make the website
-  res.sendFile(path.join(__dirname, 'booking.html'));
+app.get('/', function(req, res) { //calls frontend to make the website
+  console.log('get check')
+  res.render('index');
+  //res.sendFile(path.join(__dirname, '/Users/josephtsocanos/Documents/GitHub/A-MJLK/booking.html'));
+});
+
+app.get('/index.ejs', function(req, res) { //calls frontend to make the website
+  console.log('get check')
+  res.render('index');
+  //res.sendFile(path.join(__dirname, '/Users/josephtsocanos/Documents/GitHub/A-MJLK/booking.html'));
+});
+
+app.get('/about.ejs', function(req, res) { //calls frontend to make the website
+  console.log('get check')
+  res.render('about');
+  //res.sendFile(path.join(__dirname, '/Users/josephtsocanos/Documents/GitHub/A-MJLK/booking.html'));
 });
 // use res.render to load up an ejs view file
 
