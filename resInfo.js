@@ -49,7 +49,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs')
 
-const path = require('path')
+//const path = require('path')
 
 app.get('/', function(req, res) { //calls frontend to make the website
   console.log('get check')
@@ -66,6 +66,42 @@ app.get('/index.ejs', function(req, res) { //calls frontend to make the website
 app.get('/about.ejs', function(req, res) { //calls frontend to make the website
   console.log('get check')
   res.render('about');
+  //res.sendFile(path.join(__dirname, '/Users/josephtsocanos/Documents/GitHub/A-MJLK/booking.html'));
+});
+
+app.get('/booking.ejs', function(req, res) { //calls frontend to make the website
+  console.log('get check')
+  res.render('booking');
+  //res.sendFile(path.join(__dirname, '/Users/josephtsocanos/Documents/GitHub/A-MJLK/booking.html'));
+});
+
+app.get('/contact.ejs', function(req, res) { //calls frontend to make the website
+  console.log('get check')
+  res.render('contact');
+  //res.sendFile(path.join(__dirname, '/Users/josephtsocanos/Documents/GitHub/A-MJLK/booking.html'));
+});
+
+app.get('/menu.ejs', function(req, res) { //calls frontend to make the website
+  console.log('get check')
+  res.render('menu');
+  //res.sendFile(path.join(__dirname, '/Users/josephtsocanos/Documents/GitHub/A-MJLK/booking.html'));
+});
+
+app.get('/service.ejs', function(req, res) { //calls frontend to make the website
+  console.log('get check')
+  res.render('service');
+  //res.sendFile(path.join(__dirname, '/Users/josephtsocanos/Documents/GitHub/A-MJLK/booking.html'));
+});
+
+app.get('/team.ejs', function(req, res) { //calls frontend to make the website
+  console.log('get check')
+  res.render('team');
+  //res.sendFile(path.join(__dirname, '/Users/josephtsocanos/Documents/GitHub/A-MJLK/booking.html'));
+});
+
+app.get('/testimonial.ejs', function(req, res) { //calls frontend to make the website
+  console.log('get check')
+  res.render('testimonial');
   //res.sendFile(path.join(__dirname, '/Users/josephtsocanos/Documents/GitHub/A-MJLK/booking.html'));
 });
 // use res.render to load up an ejs view file
