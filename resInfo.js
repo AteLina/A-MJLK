@@ -45,6 +45,9 @@ asyncFunction();
 
 // For parsing application/json
 app.use(express.json());
+app.use(express.static("scss"));
+app.use(express.static("img"));
+app.use(express.static("css"));
 // For parsing application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs')
@@ -116,7 +119,7 @@ app.post('/reserveInfo', async function(req, res) { //accepts comments from fron
   
   //console.log(comments)
   // res.send('post method')
-  res.redirect('/') //redirects to main page (first app.get)
+  res.redirect('/booking.ejs') //redirects to booking page
 });
 
 app.listen(3000);
