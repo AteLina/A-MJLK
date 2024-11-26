@@ -112,7 +112,7 @@ app.get('/testimonial.ejs', function(req, res) { //calls frontend to make the we
 
 app.post('/reserveInfo', async function(req, res) { //accepts comments from front end and stores them
   console.log("check")
-  console.log(req.body)
+  console.log(req.body) //{name:}
   //const reserveName = req.body.name
   //const ID = await reserveInfo.create({ reserveName: name});
   //console.log("Auto-generated ID:", ID.id);
@@ -122,7 +122,7 @@ app.post('/reserveInfo', async function(req, res) { //accepts comments from fron
   res.redirect('/booking.ejs') //redirects to booking page
 });
 
-app.listen(3000);
+app.listen(4000);
 console.log('Server is listening on port 3000');
 
 
