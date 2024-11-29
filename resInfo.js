@@ -14,19 +14,23 @@ const reserveInfo = sequelize.define(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    dateTime: {
+        type: DataTypes.DATE,
+        allowNull: false,
+    },
+    partySize: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    special: {
+      type: DataTypes.STRING,
+      allowNull: true,
     }
-    //email: {
-    //    type: DataTypes.STRING,
-    //    allowNull: false
-    //},
-    //dateTime: {
-    //    type: DataTypes.STRING, //Figure out the date time stuff
-    //    allowNull: false,
-    //},
-    //partySize: {
-    //    type: DataTypes.INTEGER,
-    //    allowNull: false,
-    //},
   },
   {
     // Other model options go here
@@ -55,55 +59,46 @@ app.set('view engine', 'ejs')
 //const path = require('path')
 
 app.get('/', function(req, res) { //calls frontend to make the website
-  console.log('get check')
   res.render('index');
   //res.sendFile(path.join(__dirname, '/Users/josephtsocanos/Documents/GitHub/A-MJLK/booking.html'));
 });
 
 app.get('/index.ejs', function(req, res) { //calls frontend to make the website
-  console.log('get check')
   res.render('index');
   //res.sendFile(path.join(__dirname, '/Users/josephtsocanos/Documents/GitHub/A-MJLK/booking.html'));
 });
 
 app.get('/about.ejs', function(req, res) { //calls frontend to make the website
-  console.log('get check')
   res.render('about');
   //res.sendFile(path.join(__dirname, '/Users/josephtsocanos/Documents/GitHub/A-MJLK/booking.html'));
 });
 
 app.get('/booking.ejs', function(req, res) { //calls frontend to make the website
-  console.log('get check')
   res.render('booking');
   //res.sendFile(path.join(__dirname, '/Users/josephtsocanos/Documents/GitHub/A-MJLK/booking.html'));
 });
 
 app.get('/contact.ejs', function(req, res) { //calls frontend to make the website
-  console.log('get check')
   res.render('contact');
   //res.sendFile(path.join(__dirname, '/Users/josephtsocanos/Documents/GitHub/A-MJLK/booking.html'));
 });
 
 app.get('/menu.ejs', function(req, res) { //calls frontend to make the website
-  console.log('get check')
   res.render('menu');
   //res.sendFile(path.join(__dirname, '/Users/josephtsocanos/Documents/GitHub/A-MJLK/booking.html'));
 });
 
 app.get('/service.ejs', function(req, res) { //calls frontend to make the website
-  console.log('get check')
   res.render('service');
   //res.sendFile(path.join(__dirname, '/Users/josephtsocanos/Documents/GitHub/A-MJLK/booking.html'));
 });
 
 app.get('/team.ejs', function(req, res) { //calls frontend to make the website
-  console.log('get check')
   res.render('team');
   //res.sendFile(path.join(__dirname, '/Users/josephtsocanos/Documents/GitHub/A-MJLK/booking.html'));
 });
 
 app.get('/testimonial.ejs', function(req, res) { //calls frontend to make the website
-  console.log('get check')
   res.render('testimonial');
   //res.sendFile(path.join(__dirname, '/Users/josephtsocanos/Documents/GitHub/A-MJLK/booking.html'));
 });
@@ -111,11 +106,17 @@ app.get('/testimonial.ejs', function(req, res) { //calls frontend to make the we
 
 
 app.post('/reserveInfo', async function(req, res) { //accepts comments from front end and stores them
-  console.log("check")
-  console.log(req.body) //{name:}
-  //const reserveName = req.body.name
-  //const ID = await reserveInfo.create({ reserveName: name});
-  //console.log("Auto-generated ID:", ID.id);
+  //console.log("check")
+  //console.log(req.body) //{name:}
+
+  const ID = await reserveInfo.create({ 
+    name: req.body.name, 
+    email: req.body.email, 
+    dateTime: req.body.dateTime, 
+    partySize: req.body.partySize,
+    special: req.body.specialReq
+  });
+  console.log("Auto-generated ID:", ID.id);
   
   //console.log(comments)
   // res.send('post method')
