@@ -109,22 +109,42 @@ app.post('/reserveInfo', async function(req, res) { //accepts comments from fron
   //console.log("check")
   //console.log(req.body) //{name:}
 
-  const ID = await reserveInfo.create({ 
-    name: req.body.name, 
-    email: req.body.email, 
-    dateTime: req.body.dateTime, 
-    partySize: req.body.partySize,
-    special: req.body.specialReq
-  });
-  console.log("Auto-generated ID:", ID.id);
+  const previousReserve = await reserveInfo.findAll();
+  //console.log(previousReserve)
+
+  var repeatReserve = false
+
+  //var temp = (previousReserve[0].dataValues.dateTime == Date('2024-11-29 07:12:00.000+00:00'))
+  //console.log(temp)
   
-  //console.log(comments)
-  // res.send('post method')
+
+  for (i = 0; i < previousReserve.length; i++){
+    if (previousReserve[i].dataValues.dateTime == req.body.dateTime){
+      repeatReserve = true
+      //console.log(previousReserve[i].dataValues.dateTime)
+    }
+  }
+  //console.log(repeatReserve)
+
+  if (repeatReserve == false){
+    const ID = await reserveInfo.create({ 
+      name: req.body.name, 
+      email: req.body.email, 
+      dateTime: req.body.dateTime, 
+      partySize: req.body.partySize,
+      special: req.body.specialReq
+    });
+    console.log("Auto-generated ID:", ID.id);
+} else {
+    console.log("Time already booked")
+}
+
+
   res.redirect('/booking.ejs') //redirects to booking page
 });
 
 app.listen(4000);
-console.log('Server is listening on port 3000');
+console.log('Server is listening on port 4000');
 
 
 
