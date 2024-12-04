@@ -33,15 +33,77 @@ const reserveInfo = sequelize.define(
     }
   },
   {
-    // Other model options go here
+    //other models go here
   },
 );
 
+const sequelize2 = new Sequelize({
+  dialect: 'sqlite',
+  storage: 'Inventory.sqlite' //path to dtabase file
+});
+
+const stockInfo = sequelize.define(
+  'stockTable',
+  {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    value: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    }
+  },
+);
+
+
+
 async function asyncFunction () {
   await reserveInfo.sync();
+  await stockInfo.sync();
   console.log('The table for the User model was just (re)created!');
 }
 asyncFunction();
+
+async function asyncFunction2 (){
+  const ID = await stockInfo.create({ 
+    name: 'Chicken', 
+    value: '50',
+  })
+}
+
+async function asyncFunction3 (){
+  const ID = await stockInfo.create({ 
+    name: 'Bread', 
+    value: '50',
+  })
+}
+
+async function asyncFunction4 (){
+  const ID = await stockInfo.create({ 
+    name: 'Tomato', 
+    value: '50',
+  })
+}
+
+async function asyncFunction5 (){
+  const ID = await stockInfo.create({ 
+    name: 'Lettuce', 
+    value: '50',
+  })
+}
+
+async function asyncFunction6 (){
+  const ID = await stockInfo.create({ 
+    name: 'Cheese', 
+    value: '50',
+  })
+}
+//asyncFunction2();
+//asyncFunction3();
+//asyncFunction4();
+//asyncFunction5();
+//asyncFunction6();
 
 
 // `sequelize.define` also returns the model
@@ -83,8 +145,10 @@ app.get('/contact.ejs', function(req, res) { //calls frontend to make the websit
   //res.sendFile(path.join(__dirname, '/Users/josephtsocanos/Documents/GitHub/A-MJLK/booking.html'));
 });
 
-app.get('/menu.ejs', function(req, res) { //calls frontend to make the website
-  res.render('menu');
+app.get('/menu.ejs', async function(req, res) { //calls frontend to make the website
+  const items = await stockInfo.findAll();
+  //console.log(stock)
+  res.render('menu', {stockList: items});
   //res.sendFile(path.join(__dirname, '/Users/josephtsocanos/Documents/GitHub/A-MJLK/booking.html'));
 });
 
