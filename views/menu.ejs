@@ -98,11 +98,18 @@
         <!-- Menu Start -->
         <div class="container-xxl py-5">
             <div class="container">
+                <form action = "/updateStock" method = "post">
                 <ul> <!-- ul: unordered list (wrapper) -->
                     <% for (item of stockList) { %>
-                        <li><%= item.dataValues.name %>: <%= item.dataValues.value %>  <button type='button'>Order</button></li> <!-- li: list item -->
+                        <li><%= item.dataValues.name %>: <%= %>  
+                            <input type="text" size="4" id="updateValue" name = "updateValue" placeholder= <%= item.dataValues.value  %> /> 
+                            <input type="hidden" id="updateName" name="updateName" value= <%= item.dataValues.name %> /> 
+                            <button type="submit">Update Stock</button>
+                            <button type='button'>Order</button></li> <!-- li: list item -->
                     <% } %>
                 </ul>
+                </form>
+
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                     <h5 class="section-title ff-secondary text-center text-primary fw-normal">Food Menu</h5>
                     <h1 class="mb-5">Most Popular Items</h1>

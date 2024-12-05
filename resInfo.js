@@ -168,6 +168,15 @@ app.get('/testimonial.ejs', function(req, res) { //calls frontend to make the we
 });
 // use res.render to load up an ejs view file
 
+app.post('/updateStock', async function(req, res) {
+  const itemForUpdate = await stockInfo.findOne({where: {name: req.body.updateName}});
+  //console.log(req.body)
+  itemForUpdate.value = req.body.updateValue[0]
+  await itemForUpdate.save()
+
+  res.redirect('/menu.ejs')
+});
+
 
 app.post('/reserveInfo', async function(req, res) { //accepts comments from front end and stores them
   //console.log("check")
